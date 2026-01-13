@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@400;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --yellow-main: #FFD93D;
+      --yellow-light: #FFF3B0;
+      --yellow-dark: #F5B800;
+      --purple-pastel: #E8D5FF;
+      --purple-light: #F3EAFF;
+      --purple-accent: #C9A0FF;
+      --pink-accent: #FFB8E0;
+      --mint-accent: #A8F0D4;
+      --white: #FFFFFF;
+      --dark: #2D2D2D;
+      --gray: #666666;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      background: var(--yellow-light);
+      color: var(--dark);
+      overflow-x: hidden;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='8' fill='%23FFD93D' stroke='%232D2D2D' stroke-width='2'/%3E%3C/svg%3E") 16 16, auto;
+    }
+
+    /* Floating decorations */
+    .floating-shapes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    .shape:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, var(--purple-pastel) 0%, transparent 70%);
+      top: 10%;
+      right: -100px;
+      animation-delay: 0s;
+    }
+
+    .shape:nth-child(2) {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, var(--yellow-main) 0%, transparent 70%);
+      top: 50%;
+      left: -50px;
+      animation-delay: -5s;
+    }
+
+    .shape:nth-child(3) {
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, var(--pink-accent) 0%, transparent 70%);
+      bottom: 10%;
+      right: 10%;
+      animation-delay: -10s;
+    }
+
+    .shape:nth-child(4) {
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, var(--mint-accent) 0%, transparent 70%);
+      top: 30%;
+      left: 30%;
+      animation-delay: -15s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(30px, -30px) rotate(5deg); }
+      50% { transform: translate(-20px, 20px) rotate(-5deg); }
+      75% { transform: translate(20px, 10px) rotate(3deg); }
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      background: rgba(255, 243, 176, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 4px solid var(--dark);
+    }
+
+    .logo {
+      font-family: 'Dela Gothic One', cursive;
+      font-size: 1.5rem;
+      color: var(--dark);
+      text-decoration: none;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: rotate(-5deg) scale(1.1);
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
+    }
+
+    nav a {
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--dark);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 4px;
+      background: var(--yellow-main);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a:hover {
+      background: var(--yellow-main);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 20px 60px;
+      position: relative;
+    }
+
+    .hero-badge {
+      background: var(--purple-pastel);
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 30px;
+      border: 3px solid var(--dark);
+      animation: bounce 2s ease-in-out infinite;
+      box-shadow: 4px 4px 0 var(--dark);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero h1 {
+      font-family: 'Dela Gothic One', cursive;
+      font-size: clamp(3rem, 10vw, 8rem);
+      line-height: 1.1;
+      margin-bottom: 20px;
+      animation: titlePop 0.8s ease-out;
+    }
+
+    @keyframes titlePop {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .hero h1 span {
+      display: inline-block;
+      background: var(--yellow-main);
+      padding: 10px 30px;
+      border-radius: 20px;
+      border: 5px solid var(--dark);
+      box-shadow: 8px 8px 0 var(--dark);
+      transition: all 0.3s ease;
+    }
+
+    .hero h1 span:hover {
+      transform: rotate(-3deg) scale(1.05);
+      box-shadow: 12px 12px 0 var(--dark);
+    }
+
+    .hero-subtitle {
+      font-family: 'Press Start 2P', cursive;
+      font-size: clamp(0.8rem, 2vw, 1.2rem);
+      color: var(--gray);
+      margin-bottom: 40px;
+      animation: fadeInUp 0.8s ease-out 0.3s both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-description {
+      max-width: 600px;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 40px;
+      animation: fadeInUp 0.8s ease-out 0.5s both;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 100px 40px;
+      position: relative;
+    }
+
+    .section-title {
+      font-family: 'Dela Gothic One', cursive;
+      font-size: clamp(2rem, 5vw, 4rem);
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .section-title::before {
+      content: '★';
+      position: absolute;
+      left: calc(50% - 280px);
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      animation: spin 4s linear infinite;
+    }
+
+    .section-title::after {
+      content: '★';
+      position: absolute;
+      right: calc(50% - 280px);
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      animation: spin 4s linear infinite reverse;
+    }
+
+    @keyframes spin {
+      from { transform: translateY(-50%) rotate(0deg); }
+      to { transform: translateY(-50%) rotate(360deg); }
+    }
+
+    /* Works Section */
+    .works {
+      background: var(--white);
+      border-top: 5px solid var(--dark);
+      border-bottom: 5px solid var(--dark);
+    }
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .work-card {
+      background: var(--yellow-light);
+      border: 5px solid var(--dark);
+      border-radius: 30px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      box-shadow: 8px 8px 0 var(--dark);
+      position: relative;
+    }
+
+    .work-card:hover {
+      transform: translateY(-10px) rotate(-2deg);
+      box-shadow: 15px 15px 0 var(--dark);
+    }
+
+    .work-card.in-progress {
+      background: var(--purple-light);
+    }
+
+    .work-card.in-progress::before {
+      content: '🚧 制作中';
+      position: absolute;
+      top: 20px;
+      right: -35px;
+      background: var(--pink-accent);
+      padding: 8px 50px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      transform: rotate(45deg);
+      border: 3px solid var(--dark);
+      z-index: 10;
+    }
+
+    .work-image {
+      width: 100%;
+      height: 250px;
+      background: linear-gradient(135deg, var(--yellow-main), var(--purple-pastel));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 3rem;
+      border-bottom: 5px solid var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .work-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .work-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .work-card:hover .work-image::before {
+      left: 100%;
+    }
+
+    .work-content {
+      padding: 30px;
+    }
+
+    .work-title {
+      font-family: 'Dela Gothic One', cursive;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    .work-description {
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      color: var(--gray);
+    }
+
+    .work-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      background: var(--yellow-main);
+      padding: 6px 14px;
+      border-radius: 15px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: 2px solid var(--dark);
+    }
+
+    .work-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--dark);
+      color: var(--white);
+      padding: 12px 24px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+
+    .work-link:hover {
+      background: var(--purple-accent);
+      color: var(--dark);
+      transform: scale(1.05);
+    }
+
+    /* About Section */
+    .about {
+      background: linear-gradient(180deg, var(--yellow-light) 0%, var(--purple-light) 100%);
+    }
+
+    .about-content {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-avatar {
+      width: 250px;
+      height: 250px;
+      background: var(--yellow-main);
+      border: 5px solid var(--dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      box-shadow: 8px 8px 0 var(--dark);
+      animation: avatarWiggle 3s ease-in-out infinite;
+    }
+
+    @keyframes avatarWiggle {
+      0%, 100% { transform: rotate(-5deg); }
+      50% { transform: rotate(5deg); }
+    }
+
+    .about-text h3 {
+      font-family: 'Dela Gothic One', cursive;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .about-text p {
+      font-size: 1.1rem;
+      line-height: 2;
+      margin-bottom: 20px;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .skill {
+      background: var(--white);
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: 700;
+      border: 3px solid var(--dark);
+      transition: all 0.3s ease;
+    }
+
+    .skill:hover {
+      background: var(--yellow-main);
+      transform: translateY(-5px);
+    }
+
+    /* Contact Section */
+    .contact {
+      background: var(--dark);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .contact .section-title {
+      color: var(--yellow-main);
+    }
+
+    .contact .section-title::before,
+    .contact .section-title::after {
+      color: var(--yellow-main);
+    }
+
+    .contact-text {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      opacity: 0.9;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--yellow-main);
+      color: var(--dark);
+      padding: 20px 40px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.1rem;
+      border: 4px solid var(--white);
+      transition: all 0.3s ease;
+      box-shadow: 6px 6px 0 var(--purple-accent);
+    }
+
+    .contact-link:hover {
+      transform: translateY(-5px) rotate(-3deg);
+      box-shadow: 10px 10px 0 var(--purple-accent);
+    }
+
+    .contact-link svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: var(--white);
+      text-align: center;
+      padding: 30px;
+      border-top: 4px solid var(--yellow-main);
+    }
+
+    footer p {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.7rem;
+      opacity: 0.7;
+    }
+
+    /* Marquee */
+    .marquee {
+      background: var(--yellow-main);
+      padding: 15px 0;
+      border-top: 4px solid var(--dark);
+      border-bottom: 4px solid var(--dark);
+      overflow: hidden;
+    }
+
+    .marquee-content {
+      display: flex;
+      animation: marquee 20s linear infinite;
+      white-space: nowrap;
+    }
+
+    .marquee-content span {
+      font-family: 'Dela Gothic One', cursive;
+      font-size: 1.5rem;
+      padding: 0 50px;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav {
+        gap: 15px;
+      }
+
+      section {
+        padding: 60px 20px;
+      }
+
+      .works-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .about-avatar {
+        margin: 0 auto;
+      }
+
+      .section-title::before,
+      .section-title::after {
+        display: none;
+      }
+
+      .contact-links {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    /* Page load animation */
+    .fade-in {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.hidden {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating Background Shapes -->
+  <div class="floating-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <a href="#" class="logo">🎮 MY PORTFOLIO</a>
+    <nav>
+      <a href="#works">WORKS</a>
+      <a href="#about">ABOUT</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-badge">✨ Game Creator ✨</div>
+    <h1><span>RYOJI　IKEDA</span></h1>
+    <p class="hero-subtitle">GAME CREATOR / DEVELOPER</p>
+    <p class="hero-description">
+      根本的な楽しさとは何か？<br>
+      脳に焼き付くようなゲーム体験創りを目指す<br>
+      ゲームクリエイターです🎮
+    </p>
+  </section>
+
+  <!-- Marquee -->
+  <div class="marquee">
+    <div class="marquee-content">
+      <span>★ GAME CREATOR ★</span>
+      <span>🎮 LET'S PLAY 🎮</span>
+      <span>✨ FUN & CREATIVE ✨</span>
+      <span>🚀 KEEP MAKING 🚀</span>
+      <span>★ GAME CREATOR ★</span>
+      <span>🎮 LET'S PLAY 🎮</span>
+      <span>✨ FUN & CREATIVE ✨</span>
+      <span>🚀 KEEP MAKING 🚀</span>
+    </div>
+  </div>
+
+  <!-- Works Section -->
+  <section id="works" class="works">
+    <h2 class="section-title">WORKS</h2>
+    <div class="works-grid">
+      <!-- Completed Work -->
+      <div class="work-card fade-in">
+        <div class="work-image">
+          <img src="たそがれのうた.png" alt="作品タイトル">
+        </div>
+        <div class="work-content">
+          <h3 class="work-title">たそがれのうた</h3>
+          <p class="work-description">
+            少数で制作した初めてのゲーム作品。記憶の中に迷い込んだ姉妹を操り「父」と呼ばれる狂気の支配者から逃れるホラーゲームです。初めてなのでまずはベースが整っているRPGツクールを使用。初心者としてできる範囲の内容で工夫し独特な世界観を演出。制作期間：約2年。メニュー画面やゲームのイベント処理全般を担当。
+          </p>
+          <div class="work-tags">
+            <span class="tag">RPGツクールMV</span>
+            <span class="tag">2Dホラー</span>
+          </div>
+          <a href="https://store.steampowered.com/app/4160000/_/" target="_blank" class="work-link">
+            <span>Steamで見る</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Work in Progress -->
+      <div class="work-card in-progress fade-in">
+        <div class="work-image">
+          <img src="サイキッククラッシャー.png" alt="制作中の作品タイトル">
+        </div>
+        <div class="work-content">
+          <h3 class="work-title">サイキッククラッシャー（仮）</h3>
+          <p class="work-description">
+            もっとクオリティの高い作品を3Dで作りたい！と思いUE5での制作を開始。UE5を選んだ理由は情報量の多さ、ラフィックの綺麗さです。今作品は「ひたすら破壊するゲーム」ですが、ただ破壊するだけではありません。"連打"するのです。自分のパワーと比較して耐久地が大きいほど連打回数が上がる仕様です。パワーが上がるとより大きいものを破壊できることで視覚的達成感も大きいです。まだプロト段階ですが鋭利制作中です。
+          </p>
+          <div class="work-tags">
+            <span class="tag">Unreal Engine</span>
+            <span class="tag">3Dアドベンチャー</span>
+            <span class="tag">開発中</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <h2 class="section-title">ABOUT</h2>
+    <div class="about-content fade-in">
+      <div class="about-avatar">😊</div>
+      <div class="about-text">
+        <h3>RYOJI IKEDA</h3>
+        <p>
+          初めまして。池田遼次と申します。。<br>
+          ーム制作を始めたきっかけ：ゲームをプレイしていると、こうしたら面白くなりそう、またあのゲームをプレイしたいけどサービス終了してしまった。そんな時に、自分で作れば自分の望むゲームができる！と思ったのがきっかけです。<br>
+          好きなゲームジャンル：FPS / アクション / RPG<br>
+          目指しているクリエイター像：またプレイしたい！と思ってもらえるようなゲーム作りを自在に操れる魔法使いのようなプログラマー。<br><br>
+          プレイヤーに「何回プレイしても楽しい！」と思ってもらえるような<br>
+          ゲームを作ることが目標です！
+        </p>
+        <div class="skills">
+          <span class="skill">RPGツクールMV</span>
+          <span class="skill">Unreal Engine</span>
+          <span class="skill">Blueprint</span>
+          <span class="skill">Java</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <h2 class="section-title">CONTACT</h2>
+    <p class="contact-text">お気軽にご連絡ください！</p>
+    <div class="contact-links">
+      <a href="/cdn-cgi/l/email-protection#ccb5a3b9bee2a9a1ada5a08ca9b4ada1bca0a9e2afa3a1" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <span><span class="__cf_email__" data-cfemail="91e8fee4e3bff4fcf0f8fdd1f4e9f0fce1fdf4bff2fefc">ikeda.ruj@gmail.com</span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 RYOJI IKEDA. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Scroll animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Fun cursor trail effect
+    document.addEventListener('mousemove', (e) => {
+      const trail = document.createElement('div');
+      trail.style.cssText = `
+        position: fixed;
+        pointer-events: none;
+        width: 10px;
+        height: 10px;
+        background: var(--yellow-main);
+        border-radius: 50%;
+        left: ${e.clientX}px;
+        top: ${e.clientY}px;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+        animat
